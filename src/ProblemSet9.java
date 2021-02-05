@@ -1,223 +1,198 @@
+import java.util.Arrays;
 
 public class ProblemSet9 {
 
     public int[] evenOdd(int[] arr) {
         if (arr == null) {
             return null;
-        }
-        int[] answer = new int[arr.length];
-        int even = 0;
-        int odd = arr.length-1;
+        } else {
+            int[] newArray = new int[arr.length];
+            int even = 0;
+            int odd = arr.length - 1;
 
-        for (int i = 0; i < arr.length; i++) {
-
-            if (arr[i]%2 == 0) {
-                answer[even] = arr[i];
-                even++;
-            } else {
-                answer[odd] = arr[i];
-                odd--;
+            for (int i = 0; i < arr.length; i++) {
+                if (arr[i] % 2 == 0) {
+                    newArray[even] = arr[i];
+                    even++;
+                } else {
+                    newArray[odd] = arr[i];
+                    odd--;
+                }
             }
-
+            return newArray;
         }
-        return answer;
-
     }
 
     public int[] notAlone(int[] arr, int alone) {
-
         if (arr == null || arr.length == 0) {
             return null;
-        }
-
-        for (int i = 1; i < arr.length-1; i++) {
-            if (arr[i] == alone && arr[i] != arr[i-1] && arr[i] != arr[i+1]) {
-                if (arr[i+1] >= arr[i-1]) {
-                    arr[i] = arr[i+1];
-                } else {
-                    arr[i] = arr[i-1];
+        } else {
+            for (int i = 1; i < arr.length - 1; i++) {
+                if (arr[i] == alone && arr[i] != arr[i-1] && arr[i] != arr[i+1]) {
+                    if (arr[i+1] >= arr[i-1]) {
+                        arr[i] = arr[i+1];
+                    } else {
+                        arr[i] = arr[i-1];
+                    }
                 }
             }
+            return arr;
         }
-
-        return arr;
-
     }
 
     public int[] shiftLeft(int[] arr) {
-
         if (arr == null) {
             return null;
-        }
+        } else if (arr.length == 0) {
+            return arr;
+        } else {
+            int first = arr[0];
+            for (int i = 0; i < arr.length - 1; i++) {
+                arr[i] = arr[i + 1];
+            }
+            arr[arr.length - 1] = first;
 
-        if (arr.length == 0) {
             return arr;
         }
-
-        int first = arr[0];
-
-        for (int i = 0; i < arr.length-1; i++) {
-            arr[i] = arr[i+1];
-        }
-        arr[arr.length-1] = first;
-
-        return arr;
-
     }
 
     public int[] fillIn(int start, int end) {
-
         if (start > end) {
             return null;
+        } else {
+            int[] theArray = new int[end - start];
+            int counter = 0;
+            for (int i = start; i <= end - 1; i++) {
+                theArray[counter] = i;
+                counter++;
+            }
+            return theArray;
         }
-
-        int[] answer = new int[end-start];
-        int counter = 0;
-
-        for (int i = start; i <= end-1; i++) {
-            answer[counter] = i;
-            counter++;
-        }
-
-        return answer;
-
     }
 
     public boolean triple(int[] arr) {
-
         if (arr == null) {
             return false;
-        }
-
-        int counter = 0;
-
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] == 3) {
-                counter++;
-            }
-        }
-
-        if (counter == 3) {
-            return true;
-        }
-        return false;
-
-    }
-
-    public int pairs(int[] a, int[] b) {
-
-        if (a == null || b == null || a.length != b.length) {
-            return -1;
-        }
-
-        int counter = 0;
-        for (int i = 0; i < a.length; i++) {
-            if (Math.abs(a[i]-b[i]) > 0 && Math.abs(a[i]-b[i]) < 3) {
-                counter++;
-            }
-        }
-
-        return counter;
-
-    }
-
-    public boolean twentyFour(int[] arr) {
-
-        if (arr == null) {
-            return false;
-        }
-
-        boolean two = false;
-        boolean four = false;
-
-        for (int i = 0; i < arr.length-1; i++) {
-            if (arr[i] == 2 && arr[i] == arr[i+1]) {
-                two = true;
-            }
-            if (arr[i] == 4 && arr[i] == arr[i+1]) {
-                four = true;
-            }
-        }
-
-        if (two == true && four == true) {
-            return false;
-        } else if (two == true && four == false) {
-            return true;
-        } else if (two == false && four == true) {
-            return true;
         } else {
-            return false;
-        }
+            int count = 0;
 
-    }
+            for (int i = 0; i < arr.length; i++) {
+                if (arr[i] == 3) {
+                    count++;
+                }
+            }
 
-    public boolean fourteen(int[] arr) {
-
-        if (arr == null) {
-            return false;
-        }
-
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] != 1 && arr[i] != 4) {
+            if (count == 3) {
+                return true;
+            } else {
                 return false;
             }
         }
+    }
 
-        return true;
+    public int pairs(int[] a, int[] b) {
+        if (a == null || b == null || a.length != b.length) {
+            return -1;
+        } else {
+            int counter = 0;
+            for (int i = 0; i < a.length; i++) {
+                if (Math.abs(a[i] - b[i]) > 0 && Math.abs(a[i] - b[i]) < 3) {
+                    counter++;
+                }
+            }
+            return counter;
+        }
+    }
 
+    public boolean twentyFour(int[] arr) {
+        if (arr == null) {
+            return false;
+        } else {
+            boolean two = false;
+            boolean four = false;
+
+            for (int i = 0; i < arr.length - 1; i++) {
+                if (arr[i] == 2 && arr[i] == arr[i + 1]) {
+                    two = true;
+                }
+                if (arr[i] == 4 && arr[i] == arr[i + 1]) {
+                    four = true;
+                }
+            }
+
+            if (two && four) {
+                return false;
+            } else if (two) {
+                return true;
+            } else if (four) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    public boolean fourteen(int[] arr) {
+        if (arr == null) {
+            return false;
+        } else {
+            boolean onlyOneOrFour = true;
+            for (int i = 0; i < arr.length; i++) {
+                if (arr[i] != 1 && arr[i] != 4) {
+                    onlyOneOrFour = false;
+                }
+            }
+            return onlyOneOrFour;
+        }
     }
 
     public int centeredAverage(int[] arr) {
         if (arr == null || arr.length < 3) {
             return -1;
-        }
+        } else {
+            int largestIndex = 0;
+            int smallestIndex = 0;
 
-        int lIndex = 0;
-        int sIndex = 0;
-
-        for (int i = 1; i < arr.length; i++) {
-            if (arr[i] > arr[lIndex]) {
-                lIndex = i;
+            for (int i = 1; i < arr.length; i++) {
+                if (arr[i] > arr[largestIndex]) {
+                    largestIndex = i;
+                }
+                if (arr[i] < arr[smallestIndex]) {
+                    smallestIndex = i;
+                }
             }
-            if (arr[i] < arr[sIndex]){
-                sIndex = i;
-            }
-        }
 
-        int total = 0;
-        for (int j = 0; j < arr.length; j++) {
-            if (j == lIndex || j == sIndex) {
-
-            } else {
-                total += arr[j];
+            int total = 0;
+            for (int j = 0; j < arr.length; j++) {
+                if (j == largestIndex || j == smallestIndex) {
+                } else {
+                    total += arr[j];
+                }
             }
+            int average = total / ((arr.length) - 2);
+            return average;
         }
-        int average = total/((arr.length)-2);
-        return average;
 
     }
 
     public int outliers(int[] arr) {
-
         if (arr == null || arr.length < 1) {
             return -1;
-        }
+        } else {
+            int largestIndex = 0;
+            int smallestIndex = 0;
 
-        int lIndex = 0;
-        int sIndex = 0;
-
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] > arr[lIndex]) {
-                lIndex = i;
+            for (int i = 0; i < arr.length; i++) {
+                if (arr[i] > arr[largestIndex]) {
+                    largestIndex = i;
+                }
+                if (arr[i] < arr[smallestIndex]) {
+                    smallestIndex = i;
+                }
             }
-            if (arr[i] < arr[sIndex]){
-                sIndex = i;
-            }
+
+            int answer = arr[largestIndex] - arr[smallestIndex];
+            return answer;
         }
-
-        int answer = arr[lIndex] - arr[sIndex];
-
-        return answer;
-
     }
 }
